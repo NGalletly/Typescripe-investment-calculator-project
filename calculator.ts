@@ -37,8 +37,8 @@ function calculateInvestment(data: Data) {
 }
 
 function printResults(results: Results) {
-  console.log(`Final Balance: ${results.finalBalance}
-             Total Interest: ${results.totalInterest}`);
+  console.log(`Final Balance: ${results.finalBalance.toFixed(2)}
+             Total Interest: ${results.totalInterest.toFixed(2)}`);
 }
 
 const results = calculateInvestment(myInvestment);
