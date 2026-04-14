@@ -24,11 +24,14 @@ const myInvestment: Data = {
 
 function calculateInvestment(data: Data) {
   let finalBalance = data.initAmount;
-  let totalInterest = 0;
+  let totalDeposits = data.initAmount;
   for (let i = 0; i < data.duration; i++) {
-    finalBalance = finalBalance *= 1 + data.annualContribution;
-    totalInterest = finalBalance - data.initAmount;
+    finalBalance += data.annualContribution;
+    totalDeposits += data.annualContribution;
+
+    finalBalance *= 1 + data.expectedReturn;
   }
+  let totalInterest = finalBalance - totalDeposits;
 
   return {
     finalBalance: finalBalance,
