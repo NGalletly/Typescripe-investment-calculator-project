@@ -25,3 +25,6 @@ def calculate():
         'finalBalance': round(final_balance,2),
         'totalInterest': round(final_balance - total_deposits,2)
     })
+
+if __name__ == '__main__':
+    app.run(port=8000, debug=True)
