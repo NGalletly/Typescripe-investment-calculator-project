@@ -1,16 +1,23 @@
 import { useState } from "react";
 import "./App.css";
 
-interface CalculationResult {
-  future_value: string;
-}
-
 function App() {
   const [principal, setPrincipal] = useState<number | "">("");
   const [contribution, setContribution] = useState<number | "">("");
   const [rate, setRate] = useState<number | "">("");
-  const [years, setYears] = useState<number>(5);
+  const [years, setYears] = useState<number | "">("");
   const [result, setResult] = useState<string | null>(null);
+  const [history, setHistory] = useState<any[]>([]);
+
+  const getInterval = (totalYears: number) => {
+    if (totalYears <= 5) return 1;
+    if (totalYears <= 20) return 2;
+    if (totalYears <= 30) return 4;
+    if (totalYears <= 50) return 5;
+    if (totalYears <= 100) return 10;
+    if (totalYears <= 1000) return 20;
+    return 100;
+  };
 
   const handleCalculate = async () => {
     try {
@@ -28,6 +35,7 @@ function App() {
       const data = await response.json();
 
       setResult(data.finalBalance);
+      setHistory(data.yearlyHistory || []);
     } catch (error) {
       console.error("Error connecting to Flask:", error);
       alert("Make sure your Flask server is running!");
@@ -45,7 +53,11 @@ function App() {
             <input
               type="number"
               value={principal}
-              onChange={(e) => setPrincipal(Number(e.target.value))}
+              onChange={(e) =>
+                setPrincipal(
+                  e.target.value === "" ? "" : Number(e.target.value),
+                )
+              }
             />
           </div>
 
@@ -54,7 +66,11 @@ function App() {
             <input
               type="number"
               value={contribution}
-              onChange={(e) => setContribution(Number(e.target.value))}
+              onChange={(e) =>
+                setContribution(
+                  e.target.value === "" ? "" : Number(e.target.value), 
+                )
+              }
             />
           </div>
 
@@ -65,10 +81,9 @@ function App() {
               step="0.1"
               placeholder="0"
               value={rate}
-              onChange={(e) => {
-                const val = e.target.value;
-                setRate(val === "" ? "" : Number(val));
-              }}
+              onChange={(e) =>
+                setRate(e.target.value === "" ? "" : Number(e.target.value))
+              }
             />
           </div>
 
@@ -77,7 +92,9 @@ function App() {
             <input
               type="number"
               value={years}
-              onChange={(e) => setYears(Number(e.target.value))}
+              onChange={(e) =>
+                setYears(e.target.value === "" ? "" : Number(e.target.value))
+              }
             />
           </div>
 
@@ -92,6 +109,56 @@ function App() {
           </div>
         )}
       </section>
+
+      {history.length > 0 && (
+        <div className="table-container">
+          <h3>Growth Schedule</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Interest (Yearly)</th>
+                <th>Total Interest</th> 
+                <th>Total Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {history
+                .filter(
+                  (item) =>
+                    item.year === 1 ||
+                    item.year % getInterval(Number(years)) === 0 ||
+                    item.year === Number(years),
+                )
+                .map((item) => (
+                  <tr key={item.year}>
+                    <td>Year {item.year}</td>
+                    <td className="interest-cell">
+                      +$
+                      {item.interestEarned.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                      })}
+                    </td>
+                    <td className="interest-cell">
+                      $
+                      {item.totalInterest.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                      })}
+                    </td>
+                    <td className="balance-cell">
+                      <strong>
+                        $
+                        {item.balance.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                        })}
+                      </strong>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </main>
   );
 }
