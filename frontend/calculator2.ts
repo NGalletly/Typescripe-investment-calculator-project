@@ -76,6 +76,6 @@ const investmentData: InvestmentData = {
   duration: 10,
 };
 
-const results = calculateInvestment(investmentData);
+const result = calculateInvestment(investmentData);
 
-printResults(results);
+printResults(result);

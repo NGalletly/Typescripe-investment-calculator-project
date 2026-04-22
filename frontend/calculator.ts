@@ -22,7 +22,7 @@ const myInvestment: Data = {
   duration: 5,
 };
 
-function calculateInvestment(data: Data): Results {
+function calculateInvestment1(data: Data): Results {
   let finalBalance = data.initAmount;
   let totalDeposits = data.initAmount;
   for (let i = 0; i < data.duration; i++) {
@@ -39,11 +39,11 @@ function calculateInvestment(data: Data): Results {
   };
 }
 
-function printResults(results: Results): void {
+function printResults1(results: Results): void {
   console.log(`Final Balance: ${results.finalBalance.toFixed(2)}
              Total Interest: ${results.totalInterest.toFixed(2)}`);
 }
 
-const results: Results = calculateInvestment(myInvestment);
+const results: Results = calculateInvestment1(myInvestment);
 
-printResults(results);
+printResults1(results);

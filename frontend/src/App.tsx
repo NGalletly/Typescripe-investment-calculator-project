@@ -6,7 +6,8 @@ interface CalculationResult {
 }
 
 function App() {
-  const [principal, setPrincipal] = useState<number>(1000);
+  const [principal, setPrincipal] = useState<number | "">("");
+  const [contribution, setContribution] = useState<number | "">("");
   const [rate, setRate] = useState<number | "">("");
   const [years, setYears] = useState<number>(5);
   const [result, setResult] = useState<string | null>(null);
@@ -17,10 +18,10 @@ function App() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          initAmount: principal,
-          annualContribution: 0,
-          expectedReturn: rate,
-          duration: years,
+          initAmount: principal || 0,
+          annualContribution: contribution || 0,
+          expectedReturn: rate || 0,
+          duration: years || 0,
         }),
       });
 
@@ -45,6 +46,15 @@ function App() {
               type="number"
               value={principal}
               onChange={(e) => setPrincipal(Number(e.target.value))}
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Annual Contribution ($)</label>
+            <input
+              type="number"
+              value={contribution}
+              onChange={(e) => setContribution(Number(e.target.value))}
             />
           </div>
 

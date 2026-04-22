@@ -11,7 +11,7 @@ def calculate():
     data = request.json
     init_amount = data.get('initAmount', 0)
     contribution = data.get('annualContribution', 0)
-    expected_return = data.get('expectedReturn', 0)
+    expected_return = float(data.get('expectedReturn', 0)) / 100    
     duration = data.get('duration', 0)
     final_balance = init_amount
     total_deposits = init_amount
