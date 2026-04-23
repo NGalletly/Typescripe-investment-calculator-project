@@ -49,7 +49,7 @@ function App() {
 
         <div className="card">
           <div className="input-group">
-            <label>Principal ($)</label>
+            <label>Principal (£)</label>
             <input
               type="number"
               value={principal}
@@ -62,13 +62,13 @@ function App() {
           </div>
 
           <div className="input-group">
-            <label>Annual Contribution ($)</label>
+            <label>Annual Contribution (£)</label>
             <input
               type="number"
               value={contribution}
               onChange={(e) =>
                 setContribution(
-                  e.target.value === "" ? "" : Number(e.target.value), 
+                  e.target.value === "" ? "" : Number(e.target.value),
                 )
               }
             />
@@ -118,7 +118,7 @@ function App() {
               <tr>
                 <th>Year</th>
                 <th>Interest (Yearly)</th>
-                <th>Total Interest</th> 
+                <th>Total Interest</th>
                 <th>Total Balance</th>
               </tr>
             </thead>
@@ -134,20 +134,20 @@ function App() {
                   <tr key={item.year}>
                     <td>Year {item.year}</td>
                     <td className="interest-cell">
-                      +$
+                      +£
                       {item.interestEarned.toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                       })}
                     </td>
                     <td className="interest-cell">
-                      $
+                      £
                       {item.totalInterest.toLocaleString(undefined, {
                         minimumFractionDigits: 2,
                       })}
                     </td>
                     <td className="balance-cell">
                       <strong>
-                        $
+                        £
                         {item.balance.toLocaleString(undefined, {
                           minimumFractionDigits: 2,
                         })}
