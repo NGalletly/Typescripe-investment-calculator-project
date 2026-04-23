@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 interface Props {
-  onCalculate: (data: { 
-    principal: number | ""; 
-    contribution: number | ""; 
-    rate: number | ""; 
-    years: number | "" 
+  onCalculate: (data: {
+    principal: number | "";
+    contribution: number | "";
+    rate: number | "";
+    years: number | "";
   }) => void;
 }
 
@@ -22,7 +22,9 @@ export function InvestmentForm({ onCalculate }: Props) {
         <input
           type="number"
           value={principal}
-          onChange={(e) => setPrincipal(e.target.value === "" ? "" : Number(e.target.value))}
+          onChange={(e) =>
+            setPrincipal(e.target.value === "" ? "" : Number(e.target.value))
+          }
         />
       </div>
 
@@ -31,7 +33,9 @@ export function InvestmentForm({ onCalculate }: Props) {
         <input
           type="number"
           value={contribution}
-          onChange={(e) => setContribution(e.target.value === "" ? "" : Number(e.target.value))}
+          onChange={(e) =>
+            setContribution(e.target.value === "" ? "" : Number(e.target.value))
+          }
         />
       </div>
 
@@ -41,7 +45,9 @@ export function InvestmentForm({ onCalculate }: Props) {
           type="number"
           step="0.1"
           value={rate}
-          onChange={(e) => setRate(e.target.value === "" ? "" : Number(e.target.value))}
+          onChange={(e) =>
+            setRate(e.target.value === "" ? "" : Number(e.target.value))
+          }
         />
       </div>
 
@@ -49,13 +55,19 @@ export function InvestmentForm({ onCalculate }: Props) {
         <label>Years</label>
         <input
           type="number"
+          min="1"
+          max="100"
           value={years}
-          onChange={(e) => setYears(e.target.value === "" ? "" : Number(e.target.value))}
+          onChange={(e) => {
+            const val = e.target.value === "" ? "" : Number(e.target.value);
+            if (typeof val === "number" && val > 100) return;
+            setYears(val);
+          }}
         />
       </div>
 
-      <button 
-        onClick={() => onCalculate({ principal, contribution, rate, years })} 
+      <button
+        onClick={() => onCalculate({ principal, contribution, rate, years })}
         className="calc-button"
       >
         Calculate Future Value
