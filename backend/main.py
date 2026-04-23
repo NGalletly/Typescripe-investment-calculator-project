@@ -29,7 +29,7 @@ def calculate():
         })
     
     return jsonify({
-        "finalBalance": f"${balance:,.2f}",
+        "finalBalance": f"£{balance:,.2f}",
         "yearlyHistory": history
     })
 
