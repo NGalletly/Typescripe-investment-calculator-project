@@ -4,7 +4,7 @@ table {
   margin-top: 20px;
 }
 th {
-  background-color: #646cff;
+  background-color: rgb(3, 64, 3);
   color: white;
   padding: 10px;
 }
@@ -15,4 +15,17 @@ td {
 }
 tr:nth-child(even) {
   background-color: #f9f9f9;
-} 
+}
+
+.big-result {
+  font-size: 2.5rem;
+  color: rgb(3, 64, 3);
+  margin: 10px 0;
+  font-weight: 800;
+}
+
+.result-area p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}

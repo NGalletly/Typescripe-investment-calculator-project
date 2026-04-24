@@ -55,7 +55,11 @@ function App() {
 
         {result && (
           <div className="result-area">
-            <h2>Estimated Future Value: {result}</h2>
+            <p>
+              In <strong>{totalYears}</strong> years, your investment could be
+              worth:
+            </p>
+            <h2 className="big-result">{result}</h2>
           </div>
         )}
       </section>
