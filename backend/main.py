@@ -27,9 +27,14 @@ def calculate():
             "totalInterest": round(accumulated_interest, 2),
             "balance": round(balance, 2)
         })
+
+    total_deposits = float(data.get('initAmount', 0)) + (contribution * duration)    
+
     
     return jsonify({
         "finalBalance": f"£{balance:,.2f}",
+        "totalDeposits": f"£{total_deposits:,.2f}",
+        "totalInterest": f"£{accumulated_interest:,.2f}",
         "yearlyHistory": history
     })
 

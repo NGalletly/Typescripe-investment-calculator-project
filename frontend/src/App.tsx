@@ -13,6 +13,10 @@ interface InvestmentData {
 function App() {
   const [result, setResult] = useState<string | null>(null);
   const [history, setHistory] = useState<any[]>([]);
+  const [summary, setSummary] = useState<{
+    deposits: string;
+    interest: string;
+  } | null>(null);
   const [totalYears, setTotalYears] = useState<number>(0);
 
   const handleCalculate = async (formData: InvestmentData) => {
@@ -40,6 +44,10 @@ function App() {
       setResult(data.finalBalance);
       setHistory(data.yearlyHistory || []);
       setTotalYears(Number(formData.years));
+      setSummary({
+        deposits: data.totalDeposits,
+        interest: data.totalInterest,
+      });
     } catch (error) {
       console.error("Error connecting to Flask:", error);
       alert("Make sure your Flask server is running!");
@@ -53,13 +61,23 @@ function App() {
 
         <InvestmentForm onCalculate={handleCalculate} />
 
-        {result && (
+        {result && summary && (
           <div className="result-area">
             <p>
               In <strong>{totalYears}</strong> years, your investment could be
               worth:
             </p>
             <h2 className="big-result">{result}</h2>
+
+            <div className="summary-breakdown">
+              <p>
+                Total Deposits: <strong>{summary.deposits}</strong>
+              </p>
+              <p>
+                Total Interest:{" "}
+                <span className="highlight-green">{summary.interest}</span>
+              </p>
+            </div>
           </div>
         )}
       </section>
