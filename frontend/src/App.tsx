@@ -16,6 +16,11 @@ function App() {
   const [totalYears, setTotalYears] = useState<number>(0);
 
   const handleCalculate = async (formData: InvestmentData) => {
+    if (!formData.principal || !formData.rate || !formData.years) {
+      alert("Please fill in all fields to see your projection.");
+      return;
+    }
+
     try {
       const response = await fetch("http://127.0.0.1:8000/calculate", {
         method: "POST",
