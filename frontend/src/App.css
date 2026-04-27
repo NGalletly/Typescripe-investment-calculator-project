@@ -29,3 +29,49 @@ tr:nth-child(even) {
   font-size: 1.1rem;
   margin-bottom: 0;
 }
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+}
+
+.calc-button,
+.reset-button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.calc-button {
+  flex: 2;
+  background-color: rgb(3, 64, 3);
+  color: white;
+}
+
+.reset-button {
+  flex: 1;
+  background-color: #eeeeee;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.calc-button:hover,
+.reset-button:hover {
+  opacity: 0.85;
+}
+
+@media (min-width: 800px) {
+  .button-group {
+    max-width: 500px;
+  }
+}

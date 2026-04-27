@@ -10,7 +10,7 @@ interface Props {
   onReset: () => void;
 }
 
-export function InvestmentForm({ onCalculate,onReset }: Props) {
+export function InvestmentForm({ onCalculate, onReset }: Props) {
   const [principal, setPrincipal] = useState<number | "">("");
   const [contribution, setContribution] = useState<number | "">("");
   const [rate, setRate] = useState<number | "">("");
@@ -75,16 +75,18 @@ export function InvestmentForm({ onCalculate,onReset }: Props) {
         />
       </div>
 
-      <button
-        onClick={() => onCalculate({ principal, contribution, rate, years })}
-        className="calc-button"
-      >
-        Calculate Future Value
-      </button>
+      <div className="button-group">
+        <button
+          onClick={() => onCalculate({ principal, contribution, rate, years })}
+          className="calc-button"
+        >
+          Calculate Future Value
+        </button>
 
-      <button onClick={internalReset} className="reset-button">
-        Clear
-      </button>
+        <button onClick={internalReset} className="reset-button">
+          Clear
+        </button>
+      </div>
     </div>
   );
 }
