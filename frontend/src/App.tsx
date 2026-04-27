@@ -54,12 +54,19 @@ function App() {
     }
   };
 
+  const handleReset = () => {
+    setResult(null);
+    setHistory([]);
+    setSummary(null);
+    setTotalYears(0);
+  };
+
   return (
     <main className="container">
       <section id="center">
         <h1>Investment Calculator</h1>
 
-        <InvestmentForm onCalculate={handleCalculate} />
+        <InvestmentForm onCalculate={handleCalculate} onReset={handleReset} />
 
         {result && summary && (
           <div className="result-area">

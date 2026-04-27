@@ -7,13 +7,22 @@ interface Props {
     rate: number | "";
     years: number | "";
   }) => void;
+  onReset: () => void;
 }
 
-export function InvestmentForm({ onCalculate }: Props) {
+export function InvestmentForm({ onCalculate,onReset }: Props) {
   const [principal, setPrincipal] = useState<number | "">("");
   const [contribution, setContribution] = useState<number | "">("");
   const [rate, setRate] = useState<number | "">("");
   const [years, setYears] = useState<number | "">("");
+
+  const internalReset = () => {
+    setPrincipal("");
+    setContribution("");
+    setRate("");
+    setYears("");
+    onReset();
+  };
 
   return (
     <div className="card">
@@ -71,6 +80,10 @@ export function InvestmentForm({ onCalculate }: Props) {
         className="calc-button"
       >
         Calculate Future Value
+      </button>
+
+      <button onClick={internalReset} className="reset-button">
+        Clear
       </button>
     </div>
   );
