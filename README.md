@@ -1,4 +1,4 @@
-Nifty Investment Calculator!
+# Nifty Investment Calculator!
 
 A full-stack application with a **Flask** backend and **React** frontend for investment calculations and yearly growth schedule.
 
