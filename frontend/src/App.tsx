@@ -11,11 +11,11 @@ interface InvestmentData {
 }
 
 function App() {
-  const [result, setResult] = useState<string | null>(null);
+  const [result, setResult] = useState<number | null>(null);
   const [history, setHistory] = useState<any[]>([]);
   const [summary, setSummary] = useState<{
-    deposits: string;
-    interest: string;
+    deposits: number;
+    interest: number;
   } | null>(null);
   const [totalYears, setTotalYears] = useState<number>(0);
 
@@ -68,21 +68,40 @@ function App() {
 
         <InvestmentForm onCalculate={handleCalculate} onReset={handleReset} />
 
-        {result && summary && (
+        {result !== null && summary && (
           <div className="result-area">
             <p>
               In <strong>{totalYears}</strong> years, your investment could be
               worth:
             </p>
-            <h2 className="big-result">{result}</h2>
+            <h2 className="big-result">
+              £
+              {result.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </h2>
 
             <div className="summary-breakdown">
               <p>
-                Total Deposits: <strong>{summary.deposits}</strong>
+                Total Deposits:{" "}
+                <strong>
+                  £
+                  {summary.deposits.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </strong>
               </p>
               <p>
                 Total Interest:{" "}
-                <span className="highlight-green">{summary.interest}</span>
+                <span className="highlight-green">
+                  £
+                  {summary.interest.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
               </p>
             </div>
           </div>
