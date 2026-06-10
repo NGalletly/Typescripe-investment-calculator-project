@@ -32,9 +32,9 @@ def calculate():
 
     
     return jsonify({
-        "finalBalance": f"£{balance:,.2f}",
-        "totalDeposits": f"£{total_deposits:,.2f}",
-        "totalInterest": f"£{accumulated_interest:,.2f}",
+        "finalBalance": round(balance, 2),
+        "totalDeposits": round(total_deposits, 2),
+        "totalInterest": round(accumulated_interest, 2),
         "yearlyHistory": history
     })
 
